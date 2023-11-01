@@ -1,0 +1,15 @@
+id: "4"
+slug: urawa
+name: 浦和レッズ
+fullname: 浦和レッドダイヤモンズ
+short_name: 浦和
+company: 浦和レッドダイヤモンズ株式会社
+category: J1
+hometown: さいたま市
+area: 埼玉県
+website: https://www.urawa-reds.co.jp
+settlement: https://www.urawa-reds.co.jp/club/managdata.php
+relatedCompanies:
+  - 一般社団法人レッズランド
+annotation:
+  - 2021年度以前の「チーム人件費」はアカデミー指導者報酬、レディースチーム選手・指導者報酬を含む

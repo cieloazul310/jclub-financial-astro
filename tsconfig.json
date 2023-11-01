@@ -1,4 +1,4 @@
 {
   "extends": "astro/tsconfigs/strict",
-  "include": ["src", "astro.config.ts", "panda.config.ts", ".eslintrc.cjs"]
+  "include": ["src", "astro.config.ts", "panda.config.ts", ".eslintrc.cjs", "styled-system"]
 }
