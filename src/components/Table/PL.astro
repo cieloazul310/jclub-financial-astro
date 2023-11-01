@@ -1,0 +1,29 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { tableBodyCell } from "../../styles/cva";
+import type { PL } from "../../types";
+
+interface Props {
+  data: Pick<CollectionEntry<"dataset">["data"], keyof PL>;
+}
+const { data } = Astro.props;
+
+const cell = tableBodyCell();
+const strong = tableBodyCell({ emphasized: "strong" });
+const em = tableBodyCell({ emphasized: "most" });
+---
+
+<>
+  <td class={strong}>{data.revenue}</td>
+  <td class={strong}>{data.expense}</td>
+  <td class={em}>{data.op_profit}</td>
+  <td class={cell}>{data.no_rev}</td>
+  <td class={cell}>{data.no_exp}</td>
+  <td class={em}>{data.ordinary_profit}</td>
+  <td class={cell}>{data.sp_rev}</td>
+  <td class={cell}>{data.sp_exp}</td>
+  <td class={em}>{data.profit_before_tax}</td>
+  <td class={cell}>{data.tax}</td>
+  <td class={em}>{data.profit}</td>
+  <td class={cell}>{data.related_revenue}</td>
+</>

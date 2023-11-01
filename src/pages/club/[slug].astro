@@ -1,7 +1,9 @@
 ---
 import { getCollection } from "astro:content";
 import type { InferGetStaticPropsType } from "astro";
-import Layout from "../../layout/index.astro";
+import { SarkaraLayout } from "@cieloazul310/astro-sarkara";
+import Table from "../../components/Table/Table.astro";
+import { siteMetadata, menu } from "../../data";
 
 export async function getStaticPaths() {
   const clubs = await getCollection("club");
@@ -11,32 +13,25 @@ export async function getStaticPaths() {
     const { slug } = data;
     const reg = new RegExp(slug);
     return {
-    params: {
-      slug,
-    },
-    props: {
-      ...data,
-      dataset: dataset.filter((datum) => datum.id.match(reg)).map((datum) => datum.data).sort((a, b) => a.year - b.year),
-    },
-  }});
+      params: {
+        slug,
+      },
+      props: {
+        ...data,
+        dataset: dataset
+          .filter((datum) => datum.id.match(reg))
+          .map((datum) => datum.data)
+          .sort((a, b) => a.year - b.year),
+      },
+    };
+  });
 }
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { fullname, dataset } = Astro.props;
 ---
-<Layout title={fullname}>
-  <table>
-    <thead>
-    </thead>
-    <tbody>
-      {dataset.map((data) => (
-        <tr>
-          <td>{data.name}</td>
-          <td>{data.year}</td>
-          <td>{data.rank}</td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-</Layout>
+
+<SarkaraLayout title={fullname} siteMetadata={siteMetadata} menu={menu}>
+  <Table slot="jumbotron" dataset={dataset} tab="pl" />
+</SarkaraLayout>

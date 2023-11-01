@@ -1,0 +1,47 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { css } from "@cieloazul310/sarkara-css/css";
+import { container } from "@cieloazul310/sarkara-css/patterns";
+import PL from "./PL.astro";
+import { tableBodyCell } from "../../styles/cva";
+import type { Tab } from "../../types";
+
+interface Props {
+  dataset: CollectionEntry<"dataset">["data"][];
+  tab: Tab;
+}
+const { dataset, tab } = Astro.props;
+---
+
+<div class={css({ bg: { base: "neutral.50", _dark: "black" } })}>
+  <div
+    class={container({
+      maxWidth: "contentMaxWidth",
+      overflowX: "auto",
+    })}
+  >
+    <table class={css({ width: "100%", bg: { base: "white", _dark: "neutral.900" }, })}>
+      <thead>
+        <tr>
+          <th>年</th>
+          <th>所属</th>
+          <th>順位</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          dataset.map((data) => (
+            <tr>
+              <td class={tableBodyCell({ type: "head", emphasized: "strong" })}>
+                {data.year}
+              </td>
+              <td class={tableBodyCell({ type: "head" })}>{data.category}</td>
+              <td class={tableBodyCell({ type: "head" })}>{data.rank}</td>
+              {tab === "pl" && <PL data={data} />}
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

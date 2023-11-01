@@ -1,20 +1,27 @@
-import { defineConfig } from "@pandacss/dev";
+import { defineLayerStyles } from "@pandacss/dev";
+import { defineSarkaraConfig } from "@cieloazul310/astro-sarkara/preset";
 
-export default defineConfig({
-  // Whether to use css reset
-  preflight: true,
+// https://panda-css.com/docs/references/config
+export default defineSarkaraConfig({
+  // primary and secondary colors is required
+  // https://panda-css.com/docs/customization/theme#colors
+  palette: { primary: "cyan", secondary: "blue" },
 
   // Where to look for your css declarations
-  include: ["./src/**/*.{js,jsx,ts,tsx,astro}"],
+  include: ["./src/**/*.{js,ts,astro,mdx}"],
 
-  // Files to exclude
-  exclude: [],
-
-  // Useful for theme customization
+  // customizing theme
   theme: {
-    extend: {},
+    extend: {
+      layerStyles: defineLayerStyles({
+        emphasizedCell: {
+          description: "For emphasized cells",
+          value: {
+            fontWeight: "bold",
+            bg: { base: "neutral.100", _dark: "neutral.900" },
+          },
+        },
+      }),
+    },
   },
-
-  // The output directory for your css system
-  outdir: "styled-system",
 });
